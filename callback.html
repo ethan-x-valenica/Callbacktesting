@@ -6,10 +6,14 @@
     <title>Zoho CRM OAuth Callback</title>
 </head>
 <body>
-
+    <h1>Zoho CRM OAuth Callback Page</h1>
+    <p>This page is used as the callback URL for Zoho CRM OAuth2 authentication.</p>
     
     <!-- Element to display the authorization code -->
-    <p id="authCode">Code: Loading...</p>
+    <p id="authCode">Authorization Code: Loading...</p>
+
+    <!-- Button to copy the authorization code to the clipboard -->
+    <button onclick="copyAuthCode()">Copy Code to Clipboard</button>
 
     <script>
         // Function to parse the URL query parameters
@@ -18,25 +22,30 @@
             return urlParams.get(name);
         }
 
-        // Function to remove the authorization code after 60 seconds
-        function removeAuthCode() {
-            var authCodeElement = document.getElementById('authCode');
-            if (authCodeElement) {
-                authCodeElement.style.display = 'none';
+        // Function to copy the authorization code to the clipboard
+        function copyAuthCode() {
+            var authCode = getQueryParam('code');
+            if (authCode) {
+                // Create a temporary textarea element to copy the text to the clipboard
+                var tempInput = document.createElement("textarea");
+                tempInput.value = authCode;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+
+                // Provide feedback to the user
+                alert("Authorization code copied to clipboard: " + authCode);
             }
         }
 
-        // Get the authorization code from the URL query parameters
-        var authCode = getQueryParam('code');
-        if (authCode) {
-            // Display the authorization code
-            var authCodeElement = document.getElementById('authCode');
-            if (authCodeElement) {
+        // Display the authorization code
+        var authCodeElement = document.getElementById('authCode');
+        if (authCodeElement) {
+            var authCode = getQueryParam('code');
+            if (authCode) {
                 authCodeElement.textContent = 'Authorization Code: ' + authCode;
             }
-
-            // Set a timeout to remove the authorization code after 60 seconds
-            setTimeout(removeAuthCode, 60000);
         }
     </script>
 </body>
