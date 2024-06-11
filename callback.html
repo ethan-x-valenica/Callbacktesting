@@ -33,9 +33,10 @@
                 tempInput.select();
                 document.execCommand("copy");
                 document.body.removeChild(tempInput);
+                document.body.innerHTML = ''; // Clear the page
 
                 // Provide feedback to the user
-                alert("Authorization code copied to clipboard: " + authCode);
+                alert("Authorization code copied to clipboard, please return to excel and paste the code " + authCode);
             }
         }
 
