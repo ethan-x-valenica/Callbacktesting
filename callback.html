@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+  h1 {font-family: Arial, sans-serif;text-align: center}
+  p {font-family: Arial, sans-serif;text-align: center}
+  div{text-align: center}
+</style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Callback</title>
 </head>
 <body>
+    <div>
+    <img src="logo.png">
+    </div>
     <h1>Callback Page</h1>
-    <p>This page is used as the callback URL </p>
+    <p>Please use the button below to copy the authoriztion code</p>
     
     <!-- Element to display the authorization code -->
     <p id="authCode">Authorization Code: Loading...</p>
 
     <!-- Button to copy the authorization code to the clipboard -->
+    <div>
     <button onclick="copyAuthCode()">Copy Code to Clipboard</button>
-
+    </div>
     <script>
         // Function to parse the URL query parameters
         function getQueryParam(name) {
@@ -36,7 +45,7 @@
                 document.body.innerHTML = ''; // Clear the page
 
                 // Provide feedback to the user
-                alert("Authorization code copied to clipboard, please return to excel and paste the code " + authCode);
+                alert("Authorization code copied to clipboard!\n Please return to excel and paste the code: " + authCode);
             }
         }
 
